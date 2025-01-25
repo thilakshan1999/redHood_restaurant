@@ -16,12 +16,26 @@ const Header = () => {
         background: `linear-gradient(90deg,${theme.palette.primary.dark},${theme.palette.primary.main})`,
       }}
     >
-      <Toolbar>
+      <Toolbar
+        sx={{
+          maxWidth: "1200px",
+          margin: "auto",
+          width: "90%",
+          padding: "0px 20px",
+        }}
+      >
         <CustomTypography
           text={"RedHood Restaurant"}
-          variant="h5"
           color={theme.palette.text.white}
-          sx={{ flexGrow: 1, fontWeight: "bold" }}
+          sx={{
+            flexGrow: 1,
+            fontWeight: "bold",
+            fontSize: {
+              xs: "16px",
+              sm: "20px",
+              md: "24px",
+            },
+          }}
         />
 
         {/* Right Section: Cart and Profile */}
@@ -29,10 +43,24 @@ const Header = () => {
           <CustomIconButton
             icon={<ShoppingBagOutlined />}
             color={theme.palette.text.white}
+            sx={{
+              fontSize: {
+                xs: "24px",
+                sm: "28px",
+                md: "32px",
+              },
+            }}
           />
           <CustomIconButton
             icon={<AccountCircleOutlined />}
             color={theme.palette.text.white}
+            sx={{
+              fontSize: {
+                xs: "24px",
+                sm: "28px",
+                md: "32px",
+              },
+            }}
           />
         </Box>
       </Toolbar>

@@ -1,22 +1,15 @@
 import React from "react";
 import IconButton from "@mui/material/IconButton";
 
-const CustomIconButton = ({
-  icon,
-  color,
-  fontSize = "28px",
-  sx = {},
-  onClick,
-}) => {
+const CustomIconButton = ({ icon, color, sx = {}, onClick }) => {
   return (
     <IconButton
       sx={{
         color: color,
-        ...sx,
       }}
       onClick={onClick}
     >
-      {React.cloneElement(icon, { sx: { fontSize } })}
+      {React.cloneElement(icon, { sx: sx })}
     </IconButton>
   );
 };

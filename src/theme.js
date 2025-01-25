@@ -13,7 +13,7 @@ const theme = createTheme({
     text: {
       black: "#000000",
       white: "#ffffff",
-      lightGrey: "#d3d3d3",
+      lightGrey: "#777777",
       darkGrey: "#4d4d4d",
     },
   },

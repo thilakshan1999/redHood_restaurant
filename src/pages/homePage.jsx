@@ -1,10 +1,15 @@
 import React from "react";
+import HomeSection from "../sections/main/home/homeSection";
+import { Helmet } from "react-helmet";
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-    </div>
+    <>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
+      <HomeSection />
+    </>
   );
 };
 
