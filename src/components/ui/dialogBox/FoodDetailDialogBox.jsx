@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Box, Button, Modal, Typography, IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import CustomTypography from "../../../../components/ui/typography/customTypography";
+import CustomTypography from "../typography/customTypography";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import PropTypes from "prop-types";
+import FoodInfo from "../../../models/foodInfo";
+import CustomIconButton from "../button/customIconButton";
+import CustomButton from "../button/customButton";
 
-const FeaturedFoodDialogBox = ({ open, handleClose, food }) => {
+const FoodDetailDialogBox = ({ open, handleClose, food }) => {
   const [count, setCount] = useState(1);
   const theme = useTheme();
 
@@ -31,8 +35,7 @@ const FeaturedFoodDialogBox = ({ open, handleClose, food }) => {
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
           width: {
             xs: "90%",
-            sm: "70%",
-            md: "40%",
+            sm: "400px",
           },
           overflow: "hidden",
         }}
@@ -72,7 +75,7 @@ const FeaturedFoodDialogBox = ({ open, handleClose, food }) => {
 
           {/* Description */}
           <CustomTypography
-            text="Hello world how are you?"
+            text={food.description}
             align="center"
             sx={{
               fontWeight: "500",
@@ -88,40 +91,46 @@ const FeaturedFoodDialogBox = ({ open, handleClose, food }) => {
               alignItems: "center",
               justifyContent: "space-between",
               width: "95%",
+              marginTop: "10px",
               marginBottom: "16px",
             }}
           >
             {/* Price */}
             <CustomTypography
-              text={`Rs ${food.prize * count}`}
+              text={`Rs ${(food.price * count).toFixed(2)}`}
               align="center"
               sx={{
                 fontWeight: "600",
-                color: theme.palette.text.black,
+                color: theme.palette.text.green,
                 fontSize: "20px",
               }}
             />
 
             {/* Counter */}
             <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <IconButton
+              {/* Decrement Button */}
+              <CustomIconButton
+                icon={RemoveIcon}
+                color={"red"}
                 onClick={handleDecrement}
+              />
+
+              <CustomTypography
+                text={count}
+                align="center"
                 sx={{
-                  color: "red",
+                  fontWeight: "400",
+                  color: theme.palette.text.darkGrey,
+                  fontSize: "18px",
                 }}
-              >
-                <RemoveIcon />
-              </IconButton>
-              <Typography variant="body1">{count}</Typography>
+              />
+
               {/* Increment Button */}
-              <IconButton
+              <CustomIconButton
+                icon={AddIcon}
+                color={"green"}
                 onClick={handleIncrement}
-                sx={{
-                  color: "green",
-                }}
-              >
-                <AddIcon />
-              </IconButton>
+              />
             </Box>
           </Box>
 
@@ -134,42 +143,19 @@ const FeaturedFoodDialogBox = ({ open, handleClose, food }) => {
               width: "100%",
             }}
           >
-            <Button
-              variant="contained"
-              sx={{
-                flex: 1,
-                borderRadius: "8px",
-                fontWeight: "bold",
-                padding: "10px 18px",
-                backgroundColor: "#232529",
-                color: theme.palette.text.white,
-                fontSize: {
-                  xs: "12px",
-                  sm: "14px",
-                },
-                textTransform: "uppercase",
-              }}
-            >
-              Order Now
-            </Button>
-            <Button
-              variant="contained"
-              sx={{
-                flex: 1,
-                backgroundColor: theme.palette.primary.main,
-                color: theme.palette.text.white,
-                fontWeight: "bold",
-                padding: "10px 18px",
-                textTransform: "uppercase",
-                fontSize: {
-                  xs: "12px",
-                  sm: "14px",
-                },
-                borderRadius: "8px",
-              }}
-            >
-              Add to Cart
-            </Button>
+            <CustomButton
+              text={"Order Now"}
+              backgroundColor={theme.palette.button.black}
+              padding={"10px 18px"}
+              sx={{ flex: 1 }}
+            />
+
+            <CustomButton
+              text={"Add to Cart"}
+              backgroundColor={theme.palette.button.primary}
+              padding={"10px 18px"}
+              sx={{ flex: 1 }}
+            />
           </Box>
         </Box>
       </Box>
@@ -177,4 +163,8 @@ const FeaturedFoodDialogBox = ({ open, handleClose, food }) => {
   );
 };
 
-export default FeaturedFoodDialogBox;
+FoodDetailDialogBox.propTypes = {
+  food: PropTypes.instanceOf(FoodInfo).isRequired,
+};
+
+export default FoodDetailDialogBox;

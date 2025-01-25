@@ -1,30 +1,7 @@
 import { Box } from "@mui/material";
-import FeaturedFoodsImg from "../../../../assets/images/featuredFood/Briyani.jpg";
-import HomeCategoryCard from "./homeCategoriesCard";
+import CategoryCard from "../../../../components/ui/card/categoriesCard";
 import ContentHeading from "../../../../components/ui/heading/contentHeading";
-
-const categoryList = [
-  {
-    image: FeaturedFoodsImg,
-    name: "Biriyanies",
-    type: "Main Course",
-  },
-  {
-    image: FeaturedFoodsImg,
-    name: "Kottu",
-    type: "Main Course",
-  },
-  {
-    image: FeaturedFoodsImg,
-    name: "Soft Drinks",
-    type: "Beverages",
-  },
-  {
-    image: FeaturedFoodsImg,
-    name: "Rice & Curry",
-    type: "Main Course",
-  },
-];
+import { categorySampleList } from "../../../../models/categoryInfo";
 
 const HomeCategories = () => {
   return (
@@ -50,13 +27,8 @@ const HomeCategories = () => {
           marginTop: "40px",
         }}
       >
-        {categoryList.map((category, index) => (
-          <HomeCategoryCard
-            key={index}
-            image={category.image}
-            name={category.name}
-            type={category.type}
-          />
+        {categorySampleList.map((category, index) => (
+          <CategoryCard key={index} category={category} />
         ))}
       </Box>
     </Box>

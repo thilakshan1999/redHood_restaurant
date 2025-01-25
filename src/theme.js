@@ -8,13 +8,18 @@ const theme = createTheme({
       dark: "#fe2f36",
     },
     secondary: {
-      main: "#9c27b0",
+      main: "#28a745",
     },
     text: {
       black: "#000000",
       white: "#ffffff",
       lightGrey: "#777777",
       darkGrey: "#4d4d4d",
+      green: "#28a745",
+    },
+    button: {
+      black: "#232529",
+      primary: "#f8780f",
     },
   },
   typography: {

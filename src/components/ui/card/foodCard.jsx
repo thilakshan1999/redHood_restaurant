@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Box, Button, useTheme } from "@mui/material";
-import CustomTypography from "../../../../components/ui/typography/customTypography";
-import FeaturedFoodDialogBox from "./featureFoodDialogBox";
+import CustomTypography from "../typography/customTypography";
+import FoodDetailDialogBox from "../dialogBox/FoodDetailDialogBox";
+import PropTypes from "prop-types";
+import FoodInfo from "../../../models/foodInfo";
+import CustomButton from "../button/customButton";
 
-const FeaturedFoodsCard = ({ image, name, category, prize }) => {
+const FoodCard = ({ foodInfo }) => {
   const theme = useTheme();
-  const dummyPrize = 50;
 
   const [open, setOpen] = useState(false);
 
@@ -37,7 +39,7 @@ const FeaturedFoodsCard = ({ image, name, category, prize }) => {
         {/* Image */}
         <Box
           component="img"
-          src={image}
+          src={foodInfo.image}
           alt="Featured Food"
           sx={{
             width: "100%",
@@ -55,7 +57,7 @@ const FeaturedFoodsCard = ({ image, name, category, prize }) => {
         >
           {/* Name */}
           <CustomTypography
-            text={name}
+            text={foodInfo.name}
             align="center"
             sx={{
               fontWeight: "600",
@@ -69,7 +71,7 @@ const FeaturedFoodsCard = ({ image, name, category, prize }) => {
 
           {/* Category */}
           <CustomTypography
-            text={category}
+            text={foodInfo.category}
             align="center"
             sx={{
               fontWeight: "400",
@@ -84,44 +86,36 @@ const FeaturedFoodsCard = ({ image, name, category, prize }) => {
 
           {/* Price */}
           <CustomTypography
-            text={prize}
+            text={`Rs ${parseFloat(foodInfo.price).toFixed(2)}`}
             align="center"
             sx={{
               fontWeight: "600",
-              color: theme.palette.text.black,
+              color: theme.palette.text.green,
               fontSize: "18px",
               marginTop: "5px",
             }}
           />
 
           {/* Add to Cart Button */}
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: theme.palette.primary.main,
-              color: theme.palette.text.white,
-              fontWeight: "bold",
-              padding: "5px 18px",
-              textTransform: "uppercase",
-              fontSize: {
-                xs: "10px",
-                sm: "14px",
-              },
-              borderRadius: "8px",
-            }}
-          >
-            Add to Cart
-          </Button>
+          <CustomButton
+            text={"Add to Cart"}
+            backgroundColor={theme.palette.button.primary}
+            padding={"5px 18px"}
+          />
         </Box>
       </Box>
       {/* Modal */}
-      <FeaturedFoodDialogBox
+      <FoodDetailDialogBox
         open={open}
         handleClose={handleClose}
-        food={{ image, name, dummyPrize }}
+        food={foodInfo}
       />
     </>
   );
 };
 
-export default FeaturedFoodsCard;
+FoodCard.propTypes = {
+  foodInfo: PropTypes.instanceOf(FoodInfo).isRequired,
+};
+
+export default FoodCard;

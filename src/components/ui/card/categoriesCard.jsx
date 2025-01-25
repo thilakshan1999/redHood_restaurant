@@ -1,11 +1,20 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Box, useTheme } from "@mui/material";
-import CustomTypography from "../../../../components/ui/typography/customTypography";
+import CustomTypography from "../typography/customTypography";
+import { useNavigate } from "react-router-dom";
+import CategoryInfo from "../../../models/categoryInfo";
 
-const HomeCategoryCard = ({ image, name, type }) => {
+const CategoryCard = ({ category }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const navigateCategory = () => {
+    navigate(`/category/${category.name}`);
+  };
   return (
     <Box
+      onClick={navigateCategory}
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -26,7 +35,7 @@ const HomeCategoryCard = ({ image, name, type }) => {
       {/* Image */}
       <Box
         component="img"
-        src={image}
+        src={category.image}
         alt="Featured Food"
         sx={{
           width: "100px",
@@ -39,7 +48,7 @@ const HomeCategoryCard = ({ image, name, type }) => {
 
       {/* Name */}
       <CustomTypography
-        text={name}
+        text={category.name}
         align="center"
         sx={{
           fontWeight: "600",
@@ -54,7 +63,7 @@ const HomeCategoryCard = ({ image, name, type }) => {
 
       {/* Category */}
       <CustomTypography
-        text={type}
+        text={category.type}
         align="center"
         sx={{
           fontWeight: "400",
@@ -70,4 +79,8 @@ const HomeCategoryCard = ({ image, name, type }) => {
   );
 };
 
-export default HomeCategoryCard;
+CategoryCard.propTypes = {
+  category: PropTypes.instanceOf(CategoryInfo).isRequired,
+};
+
+export default CategoryCard;

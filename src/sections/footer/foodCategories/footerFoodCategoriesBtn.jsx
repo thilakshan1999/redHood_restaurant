@@ -6,13 +6,13 @@ const FooterFoodCategoriesBtn = ({ categoryName }) => {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const navigateCategory = () => {
     navigate(`/category/${categoryName}`);
   };
   return (
     <Button
       variant="outlined"
-      onClick={handleClick}
+      onClick={navigateCategory}
       sx={{
         borderColor: `${theme.palette.text.darkGrey} !important`,
         backgroundColor: "transparent !important",

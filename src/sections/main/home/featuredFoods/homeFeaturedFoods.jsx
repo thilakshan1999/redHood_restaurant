@@ -1,34 +1,7 @@
 import { Box } from "@mui/material";
-import FeaturedFoodsCard from "./featuredFoodsCard";
-import FeaturedFoodsImg from "../../../../assets/images/featuredFood/Briyani.jpg";
 import ContentHeading from "../../../../components/ui/heading/contentHeading";
-
-const foodList = [
-  {
-    image: FeaturedFoodsImg,
-    name: "Chicken Lamprais",
-    category: "Rice & Curry",
-    price: "Rs. 950.00",
-  },
-  {
-    image: FeaturedFoodsImg,
-    name: "Spaghetti Carbonara",
-    category: "Pasta",
-    price: "Rs. 850.00",
-  },
-  {
-    image: FeaturedFoodsImg,
-    name: "Grilled Chicken",
-    category: "Grill",
-    price: "Rs. 1100.00",
-  },
-  {
-    image: FeaturedFoodsImg,
-    name: "Vegetable Burger",
-    category: "Fast Food",
-    price: "Rs. 650.00",
-  },
-];
+import { foodList } from "../../../../models/foodInfo";
+import FoodCard from "../../../../components/ui/card/foodCard";
 
 const HomeFeatureFoods = () => {
   return (
@@ -55,13 +28,7 @@ const HomeFeatureFoods = () => {
         }}
       >
         {foodList.map((food, index) => (
-          <FeaturedFoodsCard
-            key={index}
-            image={food.image}
-            name={food.name}
-            category={food.category}
-            prize={food.price}
-          />
+          <FoodCard key={index} foodInfo={food} />
         ))}
       </Box>
     </Box>
