@@ -1,18 +1,30 @@
-import React, { useState } from "react";
-import { Box, Button, useTheme } from "@mui/material";
+import React, { useContext, useState } from "react";
+import { Box, useTheme } from "@mui/material";
 import CustomTypography from "../typography/customTypography";
 import FoodDetailDialogBox from "../dialogBox/FoodDetailDialogBox";
 import PropTypes from "prop-types";
 import FoodInfo from "../../../models/foodInfo";
 import CustomButton from "../button/customButton";
+import { CartContext } from "../../../provider/CartProvider";
 
 const FoodCard = ({ foodInfo }) => {
   const theme = useTheme();
+  const { isInCart, addToCart } = useContext(CartContext);
 
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleCartAction = (event) => {
+    event.stopPropagation();
+    if (isInCart(foodInfo.id)) {
+      // Optionally, navigate the user to the cart page or show a message
+      // navigateToCart();
+    } else {
+      addToCart(foodInfo, 1);
+    }
+  };
   return (
     <>
       <Box
@@ -98,8 +110,13 @@ const FoodCard = ({ foodInfo }) => {
 
           {/* Add to Cart Button */}
           <CustomButton
-            text={"Add to Cart"}
-            backgroundColor={theme.palette.button.primary}
+            onClick={handleCartAction}
+            text={isInCart(foodInfo.id) ? "Move to Cart" : "Add to Cart"}
+            backgroundColor={
+              isInCart(foodInfo.id)
+                ? theme.palette.button.black
+                : theme.palette.button.primary
+            }
             padding={"5px 18px"}
           />
         </Box>

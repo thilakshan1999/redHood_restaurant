@@ -20,6 +20,7 @@ const theme = createTheme({
     button: {
       black: "#232529",
       primary: "#f8780f",
+      red: "#ad2020",
     },
   },
   typography: {

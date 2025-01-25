@@ -1,9 +1,10 @@
 import { Button, useTheme } from "@mui/material";
 
-const CustomButton = ({ text, backgroundColor, padding, sx = {} }) => {
+const CustomButton = ({ text, backgroundColor, padding, sx = {}, onClick }) => {
   const theme = useTheme();
   return (
     <Button
+      onClick={onClick}
       variant="contained"
       sx={{
         backgroundColor: backgroundColor,

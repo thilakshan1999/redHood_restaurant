@@ -1,6 +1,7 @@
 import FeaturedFoodsImg from "../assets/images/featuredFood/Briyani.jpg";
 class FoodInfo {
-  constructor(image, name, category, price, description) {
+  constructor(id, image, name, category, price, description) {
+    this.id = id;
     this.image = image;
     this.name = name;
     this.category = category;
@@ -11,6 +12,7 @@ class FoodInfo {
 
 const foodList = [
   new FoodInfo(
+    1,
     FeaturedFoodsImg,
     "Chicken Lamprais",
     "Rice & Curry",
@@ -18,6 +20,7 @@ const foodList = [
     "A delicious combination of yellow rice, chicken, and vegetables wrapped in banana leaves."
   ),
   new FoodInfo(
+    2,
     FeaturedFoodsImg,
     "Spaghetti Carbonara",
     "Pasta",
@@ -25,6 +28,7 @@ const foodList = [
     "Classic Italian pasta dish with creamy sauce, bacon, and Parmesan cheese."
   ),
   new FoodInfo(
+    3,
     FeaturedFoodsImg,
     "Grilled Chicken",
     "Grill",
@@ -32,6 +36,7 @@ const foodList = [
     "Juicy and tender grilled chicken marinated with special spices."
   ),
   new FoodInfo(
+    4,
     FeaturedFoodsImg,
     "Vegetable Burger",
     "Fast Food",

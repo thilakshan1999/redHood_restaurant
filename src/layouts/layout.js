@@ -4,9 +4,17 @@ import Footer from "../sections/footer/footer";
 
 const Layout = () => {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh", // Ensures the layout takes full height
+      }}
+    >
       <Header />
-      <Outlet />
+      <main style={{ flex: 1 }}>
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );

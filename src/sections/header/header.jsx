@@ -1,14 +1,19 @@
-import React from "react";
-import { AppBar, Toolbar, Box, useTheme } from "@mui/material";
-import {
-  ShoppingBagOutlined,
-  AccountCircleOutlined,
-} from "@mui/icons-material";
-import CustomTypography from "../../components/ui/typography/customTypography";
+import React, { useContext } from "react";
+import { AppBar, Toolbar, Box, useTheme, IconButton } from "@mui/material";
+import { AccountCircleOutlined } from "@mui/icons-material";
 import CustomIconButton from "../../components/ui/button/customIconButton";
+import { useNavigate } from "react-router-dom";
+import CartIcon from "./cartIcon";
+import { CartContext } from "../../provider/CartProvider";
 
 const Header = () => {
   const theme = useTheme();
+  const { cartItems } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/");
+  };
   return (
     <AppBar
       position="static"
@@ -24,33 +29,27 @@ const Header = () => {
           padding: "0px 20px",
         }}
       >
-        <CustomTypography
-          text={"RedHood Restaurant"}
-          color={theme.palette.text.white}
+        <Box
+          onClick={handleClick}
           sx={{
-            flexGrow: 1,
+            cursor: "pointer", // Makes the text look clickable
             fontWeight: "bold",
             fontSize: {
               xs: "16px",
               sm: "20px",
               md: "24px",
             },
+            color: theme.palette.text.white,
+            flexGrow: 1,
           }}
-        />
+        >
+          RedHood Restaurant
+        </Box>
 
         {/* Right Section: Cart and Profile */}
         <Box sx={{ display: "flex", gap: 2 }}>
-          <CustomIconButton
-            icon={<ShoppingBagOutlined />}
-            color={theme.palette.text.white}
-            sx={{
-              fontSize: {
-                xs: "24px",
-                sm: "28px",
-                md: "32px",
-              },
-            }}
-          />
+          <CartIcon cartCount={cartItems.length} />
+
           <CustomIconButton
             icon={<AccountCircleOutlined />}
             color={theme.palette.text.white}
