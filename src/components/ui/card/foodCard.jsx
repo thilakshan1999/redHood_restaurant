@@ -6,9 +6,16 @@ import PropTypes from "prop-types";
 import FoodInfo from "../../../models/foodInfo";
 import CustomButton from "../button/customButton";
 import { CartContext } from "../../../provider/CartProvider";
+import { useNavigate } from "react-router-dom";
 
 const FoodCard = ({ foodInfo }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const navigateCart = () => {
+    navigate(`/cart`);
+  };
+
   const { isInCart, addToCart } = useContext(CartContext);
 
   const [open, setOpen] = useState(false);
@@ -19,8 +26,7 @@ const FoodCard = ({ foodInfo }) => {
   const handleCartAction = (event) => {
     event.stopPropagation();
     if (isInCart(foodInfo.id)) {
-      // Optionally, navigate the user to the cart page or show a message
-      // navigateToCart();
+      navigateCart();
     } else {
       addToCart(foodInfo, 1);
     }

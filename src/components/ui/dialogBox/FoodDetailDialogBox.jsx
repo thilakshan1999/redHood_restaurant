@@ -9,9 +9,15 @@ import FoodInfo from "../../../models/foodInfo";
 import CustomIconButton from "../button/customIconButton";
 import CustomButton from "../button/customButton";
 import { CartContext } from "../../../provider/CartProvider";
+import { useNavigate } from "react-router-dom";
 
 const FoodDetailDialogBox = ({ open, handleClose, food }) => {
   const { addToCart, isInCart, removeFromCart } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const navigateCart = () => {
+    navigate(`/cart`);
+  };
   const [count, setCount] = useState(1);
   const theme = useTheme();
 
@@ -152,6 +158,8 @@ const FoodDetailDialogBox = ({ open, handleClose, food }) => {
                   if (isInCart(food.id)) {
                     removeFromCart(food.id);
                   } else {
+                    addToCart(food, count);
+                    navigateCart();
                   }
                   handleClose();
                 }}

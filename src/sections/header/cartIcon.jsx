@@ -2,9 +2,16 @@ import { Badge } from "@mui/material";
 import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import CustomIconButton from "../../components/ui/button/customIconButton";
 import { useTheme } from "@emotion/react";
+import { useNavigate } from "react-router-dom";
 
 const CartIcon = ({ cartCount }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const navigateCart = () => {
+    navigate(`/cart`);
+  };
+
   return (
     <Badge
       badgeContent={cartCount}
@@ -21,6 +28,7 @@ const CartIcon = ({ cartCount }) => {
       }}
     >
       <CustomIconButton
+        onClick={navigateCart}
         icon={<ShoppingBagOutlined />}
         color={theme.palette.text.white}
         sx={{
