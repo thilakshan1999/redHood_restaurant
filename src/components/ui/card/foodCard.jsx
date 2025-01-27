@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Box, useTheme } from "@mui/material";
 import CustomTypography from "../typography/customTypography";
-import FoodDetailDialogBox from "../dialogBox/FoodDetailDialogBox";
+import FoodDetailDialogBox from "../dialogBox/foodDetailDialogBox";
 import PropTypes from "prop-types";
 import FoodInfo from "../../../models/foodInfo";
 import CustomButton from "../button/customButton";

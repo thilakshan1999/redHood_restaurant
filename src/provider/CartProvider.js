@@ -29,6 +29,10 @@ const CartProvider = ({ children }) => {
     );
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   const isInCart = (id) => {
     return cartItems.some((item) => item.foodInfo.id === id);
   };
@@ -42,7 +46,14 @@ const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, isInCart, getCartTotal }}
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        isInCart,
+        getCartTotal,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>

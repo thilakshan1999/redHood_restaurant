@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, Grid } from "@mui/material";
 import CustomSelect from "../../../components/ui/form/customSelect";
 
-const DeliveryForm = () => {
+const DeliveryForm = ({ onOrderPlaced }) => {
   const messageSchema = yup.object().shape({
     name: yup.string().required("Name is required"),
     phone_number: yup
@@ -40,7 +40,7 @@ const DeliveryForm = () => {
   const { handleSubmit: handleMessageSubmit } = messageMethods;
 
   const onMessageSubmit = handleMessageSubmit((data) => {
-    console.log(data);
+    onOrderPlaced(data);
   });
 
   const theme = useTheme();
