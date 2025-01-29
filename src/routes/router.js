@@ -4,6 +4,7 @@ import HomePage from "../pages/homePage";
 import CategoriesPage from "../pages/categoriesPage";
 import CartPage from "../pages/cartPage";
 import CheckoutPage from "../pages/checkoutPage";
+import AdminPage from "../pages/adminPage";
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/category/:name" element={<CategoriesPage />} />
       </Route>
+      <Route path="/admin" element={<AdminPage />} />
     </Routes>
   );
 };
