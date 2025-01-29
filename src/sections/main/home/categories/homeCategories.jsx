@@ -1,9 +1,29 @@
 import { Box } from "@mui/material";
 import CategoryCard from "../../../../components/ui/card/categoriesCard";
 import ContentHeading from "../../../../components/ui/heading/contentHeading";
-import { categorySampleList } from "../../../../models/categoryInfo";
+import { useEffect, useState } from "react";
+import CategoryApi from "../../../../api/category";
+import CategoryCardSkeleton from "../../../../components/ui/skelton/categoryCardSkelton";
 
 const HomeCategories = () => {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      setLoading(true);
+      try {
+        const data = await CategoryApi.getCategories();
+        if (data) {
+          setCategories(data);
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCategories();
+  }, []);
   return (
     <Box
       container
@@ -18,6 +38,7 @@ const HomeCategories = () => {
       }}
     >
       <ContentHeading tittle={"Categories"} />
+
       <Box
         sx={{
           display: "flex",
@@ -27,9 +48,15 @@ const HomeCategories = () => {
           marginTop: "40px",
         }}
       >
-        {categorySampleList.map((category, index) => (
-          <CategoryCard key={index} category={category} />
-        ))}
+        {loading
+          ? // ✅ Skeleton Effect while Loading
+            [...Array(6)].map((_, index) => (
+              <CategoryCardSkeleton key={index} />
+            ))
+          : // ✅ Actual Categories after Loading
+            categories.map((category, index) => (
+              <CategoryCard key={index} category={category} />
+            ))}
       </Box>
     </Box>
   );

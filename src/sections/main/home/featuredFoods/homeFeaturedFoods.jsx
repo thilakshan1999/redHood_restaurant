@@ -1,9 +1,29 @@
 import { Box } from "@mui/material";
 import ContentHeading from "../../../../components/ui/heading/contentHeading";
-import { foodList } from "../../../../models/foodInfo";
 import FoodCard from "../../../../components/ui/card/foodCard";
+import { useEffect, useState } from "react";
+import FoodApi from "../../../../api/food";
+import FoodCardSkeleton from "../../../../components/ui/skelton/FoodCardSkelton";
 
 const HomeFeatureFoods = () => {
+  const [featuredFoods, setFeaturedFoods] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      setLoading(true);
+      try {
+        const data = await FoodApi.getFeaturedFoods();
+        if (data) {
+          setFeaturedFoods(data);
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCategories();
+  }, []);
   return (
     <Box
       container
@@ -27,9 +47,11 @@ const HomeFeatureFoods = () => {
           marginTop: "40px",
         }}
       >
-        {foodList.map((food, index) => (
-          <FoodCard key={index} foodInfo={food} />
-        ))}
+        {loading
+          ? [...Array(6)].map((_, index) => <FoodCardSkeleton key={index} />)
+          : featuredFoods.map((food, index) => (
+              <FoodCard key={index} foodInfo={food} />
+            ))}
       </Box>
     </Box>
   );

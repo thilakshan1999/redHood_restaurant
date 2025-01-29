@@ -8,6 +8,13 @@ class CategoryInfo {
   }
 }
 
+class CategoryNameInfo {
+  constructor(id, name) {
+    this.id = id;
+    this.name = name;
+  }
+}
+
 const categorySampleList = [
   new CategoryInfo(1, CategoryImg, "Biriyanies", "Main Course"),
   new CategoryInfo(2, CategoryImg, "Kottu", "Main Course"),
@@ -15,5 +22,4 @@ const categorySampleList = [
   new CategoryInfo(4, CategoryImg, "Rice & Curry", "Main Course"),
 ];
 
-export default CategoryInfo;
-export { categorySampleList };
+export { CategoryInfo, CategoryNameInfo, categorySampleList };

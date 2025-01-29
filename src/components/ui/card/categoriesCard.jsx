@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Box, useTheme } from "@mui/material";
 import CustomTypography from "../typography/customTypography";
 import { useNavigate } from "react-router-dom";
-import CategoryInfo from "../../../models/categoryInfo";
+import { CategoryInfo } from "../../../models/categoryInfo";
 
 const CategoryCard = ({ category }) => {
   const theme = useTheme();
