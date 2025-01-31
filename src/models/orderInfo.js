@@ -2,19 +2,37 @@ class OrderInfo {
   constructor(
     orderId,
     customerName,
+    number,
+    orderType,
+    address,
+    emailAddress,
+    deliveryNote,
     orderOn,
     itemsCount,
-    price,
+    cartTotal,
+    deliveryCharge,
+    serviceCharge,
+    netTotal,
     foodList,
-    status
+    status,
+    paymentMethod
   ) {
     this.orderId = orderId;
     this.customerName = customerName;
+    this.number = number;
+    this.orderType = orderType;
+    this.address = address;
+    this.emailAddress = emailAddress;
+    this.deliveryNote = deliveryNote;
     this.orderOn = orderOn;
     this.itemsCount = itemsCount;
-    this.price = price;
+    this.cartTotal = cartTotal;
+    this.deliveryCharge = deliveryCharge;
+    this.serviceCharge = serviceCharge;
+    this.netTotal = netTotal;
     this.foodList = foodList;
     this.status = status;
+    this.paymentMethod = paymentMethod;
   }
 }
 

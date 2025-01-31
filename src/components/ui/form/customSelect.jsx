@@ -81,7 +81,7 @@ const CustomSelect = ({ name, labelText, width, required, options }) => {
               ))}
             </Select>
             {error && (
-              <Typography variant="body2" color="error">
+              <Typography fontSize={"12px"} color="error">
                 {error.message}
               </Typography>
             )}

@@ -73,8 +73,8 @@ const Header = () => {
         </Toolbar>
       </AppBar>
       {/* Dialog for Login */}
-      {/* <LoginDialogBox open={open} setOpen={setOpen} /> */}
-      <SignUpDialogBox open={open} setOpen={setOpen} />
+      <LoginDialogBox open={open} setOpen={setOpen} />
+      {/* <SignUpDialogBox open={open} setOpen={setOpen} /> */}
     </>
   );
 };

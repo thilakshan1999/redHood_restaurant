@@ -39,8 +39,8 @@ export default function OrderTable() {
       sx={{
         maxWidth: "1200px",
         padding: {
-          xs: "40px 20px ",
-          md: "40px 40px",
+          xs: "0px 20px ",
+          md: "0px 40px",
         },
         margin: "auto",
       }}
@@ -68,6 +68,8 @@ export default function OrderTable() {
         <Tabs
           value={activeTab}
           onChange={handleTabChange}
+          variant="scrollable"
+          scrollButtons="auto"
           textColor="primary"
           indicatorColor="primary"
           sx={{

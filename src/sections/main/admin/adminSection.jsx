@@ -1,11 +1,9 @@
-import AdminHeader from "./components/adminHeader";
-import OrderTable from "./components/table/orderTable";
+import AdminDrawer from "./components/drawer/adminDrawer";
 
 const AdminSection = () => {
   return (
     <>
-      <AdminHeader />
-      <OrderTable />
+      <AdminDrawer />
     </>
   );
 };

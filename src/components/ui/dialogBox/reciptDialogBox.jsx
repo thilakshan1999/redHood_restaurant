@@ -217,12 +217,6 @@ const ReceiptDialogBox = ({ open, onClose, receiptInfo }) => {
   );
 };
 
-const products = [
-  { name: "Product A", unitPrice: 10, quantity: 2 },
-  { name: "Product B", unitPrice: 15, quantity: 1 },
-  { name: "Product C", unitPrice: 20, quantity: 3 },
-];
-
 const PriceInfoBox = ({ tittle, price, isBold }) => {
   const theme = useTheme();
   return (

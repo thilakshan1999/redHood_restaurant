@@ -13,14 +13,24 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import CustomTypography from "../../../../../components/ui/typography/customTypography";
 import OrderTableItemMenu from "./orderTableItemMenu";
+import { ReceiptInfo } from "../../../../../models/receiptInfo";
+import OrderViewDialogBox from "./orderViewDialogBox";
 
 const OrderTableRow = ({ orderInfo }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
 
   const handleMenuClick = (event) => {
     setMenuAnchorEl(event.currentTarget);
+  };
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
 
   return (
@@ -39,9 +49,9 @@ const OrderTableRow = ({ orderInfo }) => {
           {orderInfo.itemsCount}
         </TableCell>
         <TableCell align="left" sx={{ width: "12%" }}>
-          Rs {orderInfo.price.toFixed(2)}
+          Rs {orderInfo.netTotal.toFixed(2)}
         </TableCell>
-        <TableCell>
+        <TableCell sx={{ minWidth: "100px" }}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -133,6 +143,12 @@ const OrderTableRow = ({ orderInfo }) => {
       <OrderTableItemMenu
         menuAnchorEl={menuAnchorEl}
         setMenuAnchorEl={setMenuAnchorEl}
+        orderInfo={orderInfo}
+        handleOpenDialog={handleOpenDialog}
+      />
+      <OrderViewDialogBox
+        open={openDialog}
+        onClose={handleCloseDialog}
         orderInfo={orderInfo}
       />
     </>

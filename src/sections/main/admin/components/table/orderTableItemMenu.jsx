@@ -6,6 +6,7 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { useContext } from "react";
 import { OrderContext } from "../../../../../provider/OrderProvider";
+
 const MenuItemComponent = ({ color, icon, text, onClick }) => {
   return (
     <MenuItem
@@ -35,9 +36,16 @@ const MenuItemComponent = ({ color, icon, text, onClick }) => {
   );
 };
 
-const OrderTableItemMenu = ({ menuAnchorEl, setMenuAnchorEl, orderInfo }) => {
+const OrderTableItemMenu = ({
+  menuAnchorEl,
+  setMenuAnchorEl,
+  orderInfo,
+  handleOpenDialog,
+}) => {
   const theme = useTheme();
+
   const { updateOrderStatus } = useContext(OrderContext);
+
   const handleMenuClose = () => {
     setMenuAnchorEl(null);
   };
@@ -51,6 +59,7 @@ const OrderTableItemMenu = ({ menuAnchorEl, setMenuAnchorEl, orderInfo }) => {
             icon={<Visibility />}
             text="View"
             onClick={() => {
+              handleOpenDialog();
               handleMenuClose();
             }}
           />,
@@ -81,7 +90,10 @@ const OrderTableItemMenu = ({ menuAnchorEl, setMenuAnchorEl, orderInfo }) => {
             key="confirmed_view"
             icon={<Visibility />}
             text="View"
-            onClick={() => handleMenuClose()}
+            onClick={() => {
+              handleOpenDialog();
+              handleMenuClose();
+            }}
           />,
           <MenuItemComponent
             key="confirmed_shipped"
@@ -110,7 +122,10 @@ const OrderTableItemMenu = ({ menuAnchorEl, setMenuAnchorEl, orderInfo }) => {
             key="shipped_view"
             icon={<Visibility />}
             text="View"
-            onClick={() => handleMenuClose()}
+            onClick={() => {
+              handleOpenDialog();
+              handleMenuClose();
+            }}
           />,
           <MenuItemComponent
             key="shipped_delivered"
@@ -130,7 +145,10 @@ const OrderTableItemMenu = ({ menuAnchorEl, setMenuAnchorEl, orderInfo }) => {
             key="cancelled_view"
             icon={<Visibility />}
             text="View"
-            onClick={() => handleMenuClose()}
+            onClick={() => {
+              handleOpenDialog();
+              handleMenuClose();
+            }}
           />,
         ];
       default:
