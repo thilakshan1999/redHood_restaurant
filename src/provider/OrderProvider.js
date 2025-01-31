@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import OrderInfo from "../models/orderInfo";
 import { FoodReceipt } from "../models/receiptInfo";
 
@@ -7,20 +7,40 @@ export const OrderContext = createContext();
 const OrderProvider = ({ children }) => {
   const [orders, setOrders] = useState(dummyOrderList);
 
+  useEffect(() => {
+    console.log(orders);
+  }, [orders]);
   // Add a new order
   const addOrder = (orderData) => {
-    setOrders((prevOrders) => [
-      ...prevOrders,
-      new OrderInfo(
-        orderData.orderId,
-        orderData.customerName,
-        orderData.orderOn,
-        orderData.itemsCount,
-        orderData.price,
-        orderData.foodList,
-        orderData.status
-      ),
-    ]);
+    setOrders((prevOrders) => {
+      const orderExists = prevOrders.some(
+        (order) => order.orderId === orderData.orderId
+      );
+
+      if (orderExists) return prevOrders;
+
+      return [
+        ...prevOrders,
+        new OrderInfo(
+          orderData.orderId,
+          orderData.customerName,
+          orderData.number,
+          orderData.orderType,
+          orderData.address,
+          orderData.emailAddress,
+          orderData.deliveryNote,
+          orderData.orderOn,
+          orderData.itemsCount,
+          orderData.cartTotal,
+          orderData.deliveryCharge,
+          orderData.serviceCharge,
+          orderData.netTotal,
+          orderData.foodList,
+          orderData.status,
+          orderData.paymentMethod
+        ),
+      ];
+    });
   };
 
   const updateOrderStatus = (orderId, newStatus) => {

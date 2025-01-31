@@ -31,6 +31,7 @@ const DeliveryForm = ({ onOrderPlaced }) => {
     note: "",
     order_type: "",
     address: "",
+    payment_method: "",
   };
 
   const messageMethods = useForm({

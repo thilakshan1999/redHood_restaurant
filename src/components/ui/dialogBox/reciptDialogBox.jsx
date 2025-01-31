@@ -6,13 +6,12 @@ import ProductTable from "../../../sections/main/checkout/productTable";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../button/customButton";
 
-const ReceiptDialogBox = ({ open, onClose, receiptInfo }) => {
+const ReceiptDialogBox = ({ open, orderInfo }) => {
   const navigate = useNavigate();
 
   const navigateHome = () => {
     navigate(`/`);
   };
-  console.log("Food Items:", receiptInfo.foodItems);
   const theme = useTheme();
   return (
     <Modal
@@ -64,7 +63,7 @@ const ReceiptDialogBox = ({ open, onClose, receiptInfo }) => {
             }}
           />
           <CustomTypography
-            text={`# ${receiptInfo.id}`}
+            text={`# ${orderInfo.orderId}`}
             align="center"
             sx={{
               fontWeight: "500",
@@ -97,7 +96,7 @@ const ReceiptDialogBox = ({ open, onClose, receiptInfo }) => {
               }}
             />
             <CustomTypography
-              text={receiptInfo.customerName}
+              text={orderInfo.customerName}
               align="left"
               sx={{
                 fontWeight: "500",
@@ -109,7 +108,7 @@ const ReceiptDialogBox = ({ open, onClose, receiptInfo }) => {
               }}
             />
             <CustomTypography
-              text={receiptInfo.emailAddress}
+              text={orderInfo.emailAddress}
               align="left"
               sx={{
                 fontWeight: "500",
@@ -121,7 +120,7 @@ const ReceiptDialogBox = ({ open, onClose, receiptInfo }) => {
               }}
             />
             <CustomTypography
-              text={receiptInfo.number}
+              text={orderInfo.number}
               align="left"
               sx={{
                 fontWeight: "500",
@@ -134,7 +133,7 @@ const ReceiptDialogBox = ({ open, onClose, receiptInfo }) => {
             />
 
             <CustomTypography
-              text={receiptInfo.address}
+              text={orderInfo.address}
               align="left"
               sx={{
                 fontWeight: "500",
@@ -169,7 +168,7 @@ const ReceiptDialogBox = ({ open, onClose, receiptInfo }) => {
               }}
             />
             <CustomTypography
-              text={receiptInfo.orderType
+              text={orderInfo.orderType
                 .replace("_", " ")
                 .replace(/\b\w/g, (char) => char.toUpperCase())}
               align="left"
@@ -184,23 +183,23 @@ const ReceiptDialogBox = ({ open, onClose, receiptInfo }) => {
             />
           </Box>
 
-          <ProductTable products={receiptInfo.foodItems} />
+          <ProductTable products={orderInfo.foodList} />
 
-          <PriceInfoBox tittle={"Cart Total"} price={receiptInfo.cartTotal} />
+          <PriceInfoBox tittle={"Cart Total"} price={orderInfo.cartTotal} />
 
           <PriceInfoBox
             tittle={"Delivery Charge"}
-            price={receiptInfo.deliveryCharge}
+            price={orderInfo.deliveryCharge}
           />
 
           <PriceInfoBox
             tittle={"Service Charge"}
-            price={receiptInfo.serviceCharge}
+            price={orderInfo.serviceCharge}
           />
 
           <PriceInfoBox
             tittle={"Total"}
-            price={receiptInfo.netTotal}
+            price={orderInfo.netTotal}
             isBold={true}
           />
 

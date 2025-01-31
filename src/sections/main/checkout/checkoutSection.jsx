@@ -6,7 +6,9 @@ import { CartContext } from "../../../provider/CartProvider";
 import PrizeBox from "../../../components/ui/priceBox";
 import DeliveryForm from "./deliveryForm";
 import ReceiptDialogBox from "../../../components/ui/dialogBox/reciptDialogBox";
-import { FoodReceipt, ReceiptInfo } from "../../../models/receiptInfo";
+import { FoodReceipt } from "../../../models/receiptInfo";
+import { OrderContext } from "../../../provider/OrderProvider";
+import OrderInfo from "../../../models/orderInfo";
 
 const CheckoutSection = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -16,15 +18,28 @@ const CheckoutSection = () => {
   const serviceCharge = cartTotal / 10;
   const total = cartTotal + deliverCharge + serviceCharge;
   const [preparedFoodItems, setPreparedFoodItems] = useState([]);
+  const { addOrder } = useContext(OrderContext);
 
-  const [deliveryDetails, setDeliveryDetails] = useState({
-    customerName: "",
-    number: "",
-    address: "",
-    emailAddress: "",
-    deliveryNote: "",
-    type: "",
-  });
+  const [order, setOrder] = useState(
+    new OrderInfo(
+      "", // orderId
+      "", // customerName
+      "", // phoneNumber
+      "", // orderType
+      "", // address
+      "", // emailAddress
+      "", // deliveryNote
+      "", // orderOn
+      0, // itemsCount
+      0.0, // cartTotal
+      0.0, // deliveryCharge
+      0.0, // serviceCharge
+      0.0, // netTotal
+      [], // foodList (empty array)
+      "", // status
+      "" // paymentMethod
+    )
+  );
 
   useEffect(() => {
     const prepareFoodItems = () => {
@@ -51,16 +66,29 @@ const CheckoutSection = () => {
   };
 
   const onOrderPlaced = (orderData) => {
-    console.log(orderData);
-    setDeliveryDetails({
+    const newOrder = {
+      orderId: `ORD${Math.floor(100 + Math.random() * 900)}`,
       customerName: orderData.name,
       number: orderData.phone_number,
+      orderType: orderData.order_type,
       address: orderData.address,
       emailAddress: orderData.email,
       deliveryNote: orderData.note,
-      type: orderData.order_type,
-    });
-    clearCart();
+      itemsCount: cartItems.length,
+      cartTotal: cartTotal,
+      deliveryCharge: deliverCharge,
+      serviceCharge: serviceCharge,
+      netTotal: total,
+      status: "pending",
+      paymentMethod: orderData.payment_method,
+      foodList: preparedFoodItems,
+      orderOn: new Date().toISOString().split("T")[0],
+    };
+
+    console.log("New order created:", newOrder);
+    addOrder(newOrder);
+    setOrder(newOrder);
+    //clearCart();
     handleOpenDialog();
   };
 
@@ -121,22 +149,7 @@ const CheckoutSection = () => {
       <ReceiptDialogBox
         open={openDialog}
         onClose={handleCloseDialog}
-        receiptInfo={
-          new ReceiptInfo(
-            Math.floor(Math.random() * 1e9).toString(),
-            deliveryDetails.customerName,
-            deliveryDetails.number,
-            deliveryDetails.type,
-            deliveryDetails.address,
-            deliveryDetails.emailAddress,
-            deliveryDetails.deliveryNote,
-            cartTotal,
-            deliverCharge,
-            serviceCharge,
-            total,
-            preparedFoodItems
-          )
-        }
+        orderInfo={order}
       />
     </Box>
   );

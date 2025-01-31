@@ -6,9 +6,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormProviderComponent from "../../../provider/formProviderComponent";
 import CustomTextField from "../form/customTextField";
+import { useNavigate } from "react-router-dom";
 
 const LoginDialogBox = ({ open, setOpen }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const handleClose = () => setOpen(false);
 
   const messageSchema = yup.object().shape({
@@ -31,7 +33,16 @@ const LoginDialogBox = ({ open, setOpen }) => {
 
   const { handleSubmit: handleLoginSubmit } = messageMethods;
 
-  const onSubmit = handleLoginSubmit((data) => {});
+  const onSubmit = handleLoginSubmit((data) => {
+    console.log(data);
+    if (data.email === "thilakshanlk@gmail.com" && data.password === "123456") {
+      console.log("correct account");
+      navigate("/admin");
+      handleClose();
+    } else {
+      handleClose();
+    }
+  });
   return (
     <Modal
       open={open}
